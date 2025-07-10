@@ -76,12 +76,12 @@ mod tests {
         let scope = InstrumentationScope::builder("test").build();
         let provider = SdkLoggerProvider::builder().build();
         let logger = SdkLogger::new(scope, provider);
-        
+
         // Test that clone works - this is the main goal
         #[allow(clippy::redundant_clone)]
-        let _cloned_logger = logger.clone();
-        
-        // If we reach here, clone works successfully
-        assert!(true);
+        let cloned_logger = logger.clone();
+
+        // Verify that both loggers are valid by checking they have the same scope name
+        assert_eq!(logger.scope.name(), cloned_logger.scope.name());
     }
 }
